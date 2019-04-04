@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+public class FortuneCookie implements ISurprise{
+
+	private static final Random random = new Random();
+	private String cookie;
+	private static ArrayList<String> cookies = 
+			new ArrayList<>(Arrays.asList("Cadillac stopped being the Cadillac of cars in about 1970. - Paul Graham" ,
+					"Mail? That's so asyncronous. - Dan Simms",
+					"A painter paints pictures on canvas. But musicians paint their pictures on silence. - Leopold Stokowski",
+					"It isn't martyrdom if the beliefs you're dying for aren't your own. - Megan Stevens",
+					"Unix is very simple. It just needs a genius to understand its simplicity. - Dennis Ritchie",
+					"To be successful, a piece has to reinforce the myths of the culture. - Dan Lyke",
+					"The cemeteries of the world are full of indispensable men. - Charles de Gaulle",
+					"Although I can not lay an egg, I am a very good judge of omelets. - George Bernard Shaw",
+					"There are only two ways of dealing with women... and neither of them works. - Jeff Thompson",
+					"In religion, faith is a virtue. In science, faith is a vice. - Elf Sternberg",
+					"I am not young enough to know everything. - Oscar Wilde",
+					"Atoms also want to be free -- they're just not as pushy about it. - Chris Anderson",
+					"To err is humanm, to purr feline. - Robert Byrne",
+					"I have nothing but confidence in you. And very little of that. - Groucho Marx",
+					"It is a fundamental mistake to believe that a leading edge idea requires a leading edge technology. - Norman White",
+					"Drawing on my fine command of language, I said nothing. - Mark Twain",
+					"Objects in calendar are closer than they appear. - Stephan Somogyi",
+					"Sometimes the squeaky wheel gets the hammer. - Jim Edwards-Hewitt",
+					"And I also think Ayn Rand had a fetish for naked shoulders. - Sean Conner",
+					"C++ is a large set of partially inconsistent and partially" + 
+					" incompatible features without a clear model of how they should" + 
+					" be used or how they interact. - Ross Huitt",
+					"Sleep is a poor subsititue [sic] for caffeine. - Pat Dughi"));
+
+	private FortuneCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
+	public static ISurprise generate() {
+		return new FortuneCookie(cookies.get(random.nextInt(cookies.size())));
+	}
+	
+	@Override
+	public void enjoy() {
+		System.out.println("Enjoy your gift: " + "\"" + this.cookie + "\"");
+	}
+}
