@@ -1,0 +1,92 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Stack;
+
+public class ReversePolishNotation {
+	
+	private static Queue<String> queue = new ArrayDeque<>();
+	
+	public static void main(String[] args) {
+		String s = "3+(2+1)*2^3^2-8/(5-1*2/2)";
+		
+		String [] f = reversePolishNotation(s);
+		
+		printExpresion(f);
+
+	}
+	
+	public static String [] reversePolishNotation(String s) {
+		final String ops = "-+/*^";
+		String [] str = s.split("");
+		Stack<String> stack = new Stack<>();
+		
+		for (int i=0; i<str.length; i++) {
+			switch (str[i]) {
+				case "-":
+				case "+":
+				case "/":
+				case "*":
+				case "^":
+					while (!stack.isEmpty() && (stack.peek().equals("-") || stack.peek().equals("+")
+							|| stack.peek().equals("/") || stack.peek().equals("*") || stack.peek().equals("^"))) {
+						int elemStack = ops.indexOf(stack.peek());
+						int elemStr = ops.indexOf(str[i]);
+						if (elemStack > elemStr || (elemStack == elemStr && !str[i].equals("^"))) {
+							queue.offer(stack.pop());
+						} else {
+							break;
+						}
+					}
+					stack.add(str[i]);
+					break;
+				case "(":
+					stack.add(str[i]);
+					break;
+				case ")":
+					while (!stack.isEmpty() && !stack.peek().equals("(")) {
+						if (!stack.peek().equals("(")) {
+							queue.offer(stack.pop());
+						}
+					} 
+						if (!stack.isEmpty()) {
+						stack.pop();
+					} else {
+						System.out.println("Eroare... Expresia are paranteze gresite!");
+						queue.clear();
+						break;
+					}
+					break;
+				default: 
+					queue.offer(str[i]);
+					break;
+			}
+		}
+		
+		while (!stack.isEmpty()) {
+			if (!stack.peek().equals("(")) {
+				queue.offer(stack.pop());
+			} else {
+				System.out.println("Eroare... Expresia are paranteze gresite!");
+				queue.clear();
+				break;
+			}
+		}
+		
+		String [] str2 = new String[queue.size()];
+		int i = 0;
+		while (!queue.isEmpty()) {
+			str2[i] = queue.poll();
+			i++;
+		}
+	
+		return str2;
+	}
+	
+	private static void printExpresion(String[] s) {
+		System.out.print("Forma postfixata este: ");
+		for (int i=0; i<s.length; i++) {
+			System.out.print(s[i] + " ");
+		}
+	}
+
+}
