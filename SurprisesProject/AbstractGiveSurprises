@@ -1,0 +1,50 @@
+import java.util.concurrent.TimeUnit;
+
+public abstract class AbstractGiveSurprises {
+
+	private IBag bag;
+	private int waitTime;
+	private static BagFactory fact = new BagFactory();
+
+	public AbstractGiveSurprises(String bagType, int time) {
+		this.bag = fact.makeBag(bagType);
+		this.waitTime = time;
+	}
+
+	public void put(ISurprise newSurprise) {
+		this.bag.put(newSurprise);
+	}
+	
+	public void put(IBag bag) {
+		int bagSize = bag.size();
+        for(int i = 0 ; i < bagSize ; i++){
+            this.bag.put(bag.takeOut());
+        }
+	}
+
+	public ISurprise give() {
+		giveWithPassion();
+		ISurprise surp = this.bag.takeOut();
+		surp.enjoy();
+		return surp;
+	}
+
+	public void giveAll() {
+		while(this.bag.size() !=0) {
+			give();
+			try {
+				TimeUnit.SECONDS.sleep(waitTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public boolean isEmpty() {
+		return this.bag.isEmpty();
+	}
+
+	public abstract void giveWithPassion();
+
+}
