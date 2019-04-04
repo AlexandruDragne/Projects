@@ -1,4 +1,5 @@
-// This is a project with two main parts:
+# This is a project with two main parts:
+
 1:  Application for calculating complex arithmetic expressions (containing parantheses, and any operand, including powers) 
   a: ReversePolishNotation class is the first step, transform the expression in the Polish Notation (which has no parantheses);
   b: PostfixEvaluation class it is the second step, evaluate the Polish Notation and get to the final result; 
