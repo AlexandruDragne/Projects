@@ -1,0 +1,20 @@
+public class BagFactory implements IBagFactory{
+	
+	public IBag makeBag(String type) {
+		type = type.toUpperCase();
+		switch(type) {
+			case "RANDOM":
+				RandomBag random = new RandomBag();
+				return random;
+			case "FIFO":
+				FifoBag fifo = new FifoBag();
+				return fifo;
+			case "LIFO":
+				LifoBag lifo = new LifoBag();
+				return lifo;
+			default: 
+				return null;
+		}
+	}
+
+}
