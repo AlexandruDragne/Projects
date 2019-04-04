@@ -1,1 +1,5 @@
-To be done!
+// This is a project with three main parts:
+1:  Application for calculating complex arithmetic expressions (containing parantheses, and any operand, including powers) 
+  a: ReversePolishNotation class is the first step is to transform the expression in the Polish Notation (which has no parantheses);
+  b: PostfixEvaluation class it is the second step is to evaluate this Polish Notation and get to the final result; 
+2: RadixSortIncreasing, used for sorting numbers; it uses 10 queues (one for each digit) and uses them to sort the numbers step-by-step, starting from the least significant digit, until the most significant one.
