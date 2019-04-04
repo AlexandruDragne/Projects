@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+
+public class LIFOBag implements IBag {
+	
+	private ArrayList<ISurprise> surprises = new ArrayList<>();
+	
+	public LIFOBag() {
+		
+	}
+	
+	@Override
+	public void put(ISurprise newSurprise) {
+		this.surprises.add(newSurprise);
+	}
+
+	@Override
+	public void put(IBag bagOfSurprises) {
+		while (!bagOfSurprises.isEmpty()) {
+			this.surprises.add(bagOfSurprises.takeOut());
+		}
+	}
+	
+	@Override
+	public ISurprise takeOut() {
+		if (isEmpty()) {
+			System.out.println("There is no surprise in the bag!");
+		}
+		return this.surprises.remove(size()-1);
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return this.surprises.size()==0 ? true : false;
+	}
+	
+	@Override
+	public int size() {
+		return this.surprises.size();
+	}
+}
