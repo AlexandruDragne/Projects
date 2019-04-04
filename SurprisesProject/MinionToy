@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MinionToy implements ISurprise{
+	
+	private static ArrayList<String> minionNames = new ArrayList<>(Arrays.asList("Dave", "Carl", "Kevin", "Stuart", "Jerry", "Tim"));
+	String minion;
+	private static int count = 0;
+	
+	private MinionToy (String minion) {
+		this.minion = minion;
+	}
+
+	public static ISurprise generate() {
+		String minion = minionNames.get(count);
+		if (count == minionNames.size()) {
+			count = 0;
+		} else {
+			count++;
+		}
+		return new MinionToy(minion);
+	}
+	
+	@Override
+	public void enjoy() {
+		System.out.println("Enjoy your gift: " + "\"" + this.minion + "\" Minion Toy.");
+	}
+}
