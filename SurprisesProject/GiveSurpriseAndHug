@@ -1,0 +1,11 @@
+public class GiveSurpriseAndHug extends AbstractGiveSurprises {
+	
+	public GiveSurpriseAndHug (String bagType, int time) {
+		super(bagType, time);
+	}
+
+	@Override
+	public void giveWithPassion() {
+		System.out.println("Warm wishes and a big hug!");
+	}
+}
