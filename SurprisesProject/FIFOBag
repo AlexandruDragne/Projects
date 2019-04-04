@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+
+public class FIFOBag implements IBag {
+	
+private ArrayList<ISurprise> surprises = new ArrayList<>();
+	
+	public FIFOBag() {
+		
+	}
+	
+	@Override
+	public void put(ISurprise newSurprise) {
+		this.surprises.add(newSurprise);
+	}
+	
+	@Override
+	public void put(IBag bagOfSurprises) {
+		while (!bagOfSurprises.isEmpty()) {
+			this.surprises.add(bagOfSurprises.takeOut());
+		}
+	}
+	
+	@Override
+	public ISurprise takeOut() {
+		if (isEmpty()) {
+			System.out.println("There is no surprise in the bag!");
+		} 
+		return this.surprises.remove(0);
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return this.surprises.size()==0 ? true : false;
+	}
+	
+	public int size() {
+		return this.surprises.size();
+	}
+}
