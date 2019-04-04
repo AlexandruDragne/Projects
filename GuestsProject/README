@@ -1,4 +1,6 @@
-// This project is an app for adding, removing and keeping track of the enrolled participants in an event, allowing to make checks on the list and to update details of participants. There is also a waiting list, so when a participant is removed from the main list, the first in the guests list gets a seat to the event. The app has the following classes:
-1.	Guest - class used for instantiating participants;
-2.	GuestsList - class based on one list, with methods for adding, removing, checking, updating participants;
-3.	TestApp - class that makes the use of the app more user-friendly, wrapping the methods from GuestsList;
+# Enrollment management system
+
+This project is an app for adding, removing and keeping track of the enrolled participants in an event, allowing to make checks on the list and to update details of participants. There is also a waiting list, so when a participant is removed from the main list, the first in the guests list gets a seat to the event. The app has the following classes:
+  1.	Guest - class used for instantiating participants;
+  2.	GuestsList - class based on one list, with methods for adding, removing, checking, updating participants;
+  3.	TestApp - class that makes the use of the app more user-friendly, wrapping the methods from GuestsList.
