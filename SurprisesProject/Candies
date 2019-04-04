@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Candies implements ISurprise{
+
+	private static final Random random = new Random();
+	private static ArrayList<String> typesOfCandies = 
+			new ArrayList<> (Arrays.asList("chocolate", "jelly", "fruits", "vanilla"));
+	private static int totalNumberOfCandies = 10; 
+	private String candie;
+	private int noOfCandies;
+	
+	private Candies (String candie, int noOfCandies) {
+		this.candie = candie;
+		this.noOfCandies = noOfCandies;	
+	}
+
+	public static ISurprise generate() {
+		int flavourCandie = random.nextInt(typesOfCandies.size());
+		int nrCandies = random.nextInt(totalNumberOfCandies)+10;
+		return new Candies(typesOfCandies.get(flavourCandie), nrCandies);
+	}
+	
+	@Override
+	public void enjoy() {
+		System.out.println("Enjoy your gift: " + this.noOfCandies + " " + this.candie + " candies.");
+	}
+}
