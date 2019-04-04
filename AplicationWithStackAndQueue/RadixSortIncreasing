@@ -1,0 +1,77 @@
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+
+public class RadixSortIncreasing {
+
+	private static Queue<String>[] queues;
+	private static int max;
+	private static int noQueue;
+
+	public static void main(String[] args) {
+
+		populateArrayOfQueue(10);
+		
+		ArrayList<String> list = new ArrayList<>();
+		list.add("1000");list.add("4"); list.add("25"); list.add("319"); list.add("88"); list.add("51"); list.add("3430");
+		list.add("8471"); list.add("701"); list.add("1"); list.add("2989"); list.add("657"); list.add("713");
+
+		RadixSort(list);
+
+		System.out.println(list);
+
+	}
+
+	public static void RadixSort(ArrayList<String> list) {
+		list = addZero(list);
+		int n = max - 1;
+		
+		for (int i = n; i >= 0; i--) {
+			for (int j = 0; j < list.size(); j++) {
+				int number = Character.getNumericValue(list.get(j).charAt(i));
+				queues[number].add(list.get(j));
+			}
+
+			list.clear();
+
+			for (int k = 0; k < noQueue; k++) {
+				while (!queues[k].isEmpty()) {
+					list.add(queues[k].poll());
+				}
+			}
+		}
+		
+	}
+
+	private static void populateArrayOfQueue(int n) {
+		noQueue = n;
+		queues = new Queue[n];
+		
+		for (int i = 0; i < n; i++) {
+			queues[i] = new ArrayDeque<String>();
+		}
+		
+	}
+
+	private static ArrayList<String> addZero(ArrayList<String> list) {
+		int n = maxStringLength(list);
+		
+		for (int i = 0; i < list.size(); i++) {
+			while (list.get(i).length() != n) {
+				list.set(i, "0" + list.get(i));
+			}
+		}
+		
+		return list;
+	}
+
+	private static int maxStringLength(ArrayList<String> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).length() > max) {
+				max = list.get(i).length();
+			}
+		}
+		
+		return max;
+	}
+}
