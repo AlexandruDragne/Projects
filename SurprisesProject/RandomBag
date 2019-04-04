@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class RandomBag implements IBag{
+
+	private ArrayList<ISurprise> surprises = new ArrayList<>();
+	private static Random random = new Random ();
+
+	public RandomBag() {
+
+	}
+
+	@Override
+	public void put(ISurprise newSurprise) {
+		this.surprises.add(newSurprise);
+	}
+
+	@Override
+	public void put(IBag bagOfSurprises) {
+
+		while (!bagOfSurprises.isEmpty()) {
+			this.surprises.add(bagOfSurprises.takeOut());
+		}
+	}
+
+	@Override
+	public ISurprise takeOut() {
+		ISurprise takeOutSurprise = null;
+		if (this.surprises.isEmpty() == true) {
+			System.out.println("There is no surprise in the bag!");
+		} else {
+			int surpriseNo = random.nextInt(size());
+			takeOutSurprise = this.surprises.get(surpriseNo);
+			this.surprises.remove(surpriseNo);
+		}
+		return takeOutSurprise;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.surprises.size()==0 ? true : false;
+	}
+
+	@Override
+	public int size() {
+		return this.surprises.size();
+	}
+}
