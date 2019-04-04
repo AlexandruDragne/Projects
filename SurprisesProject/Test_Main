@@ -1,0 +1,63 @@
+public class Test_Main {
+
+	public static void main(String[] args) {
+		
+		ISurprise[] surprise = GatherSurprises.gather(5);
+		
+		GiveSurpriseAndApplause giveApplause = new GiveSurpriseAndApplause("lifo", 1);
+		for (int i=0; i<5; i++) {
+			giveApplause.put(surprise[i]);
+		}
+		
+		GiveSurpriseAndHug giveHug = new GiveSurpriseAndHug("fifo", 1);
+		for (int i=0; i<5; i++) {
+			giveHug.put(surprise[i]);
+		}
+		
+		GiveSurpriseAndSing giveSing = new GiveSurpriseAndSing("random", 1);
+		for (int i=0; i<5; i++) {
+			giveSing.put(surprise[i]);
+		}
+		
+		System.out.println("Give with Applause from LIFO Bag: \n");
+		giveApplause.giveAll();
+		System.out.println();
+		System.out.println("Give with Hug from FIFO Bag: \n");
+		giveHug.giveAll();
+		System.out.println();
+		System.out.println("Give with Sing from RANDOM Bag: \n");
+		giveSing.giveAll();
+		
+		
+		
+		BagFactory bagFactory = new BagFactory();
+		IBag bag1 = bagFactory.makeBag("fifo");
+		IBag bag3 = bagFactory.makeBag("fifo");
+		for (int i=0; i<5; i++) {
+			bag1.put(surprise[i]);
+			bag3.put(surprise[i]);
+		}
+		
+		IBag bag2 = bagFactory.makeBag("lifo");
+		IBag bag4 = bagFactory.makeBag("lifo");
+		for (int i=0; i<5; i++) {
+			bag2.put(surprise[i]);
+			bag4.put(surprise[i]);
+		}
+		
+		System.out.println("----Bag FIFO---- \n");
+		while(!bag1.isEmpty()) {
+			bag1.takeOut().enjoy();
+		}
+		System.out.println("\n----Bag LIFO---- \n");
+		while(!bag2.isEmpty()) {
+			bag2.takeOut().enjoy();
+		}
+		System.out.println("\n----Bag FIFO + LIFO---- \n");
+		bag4.put(bag3);
+		while(!bag4.isEmpty()) {
+			bag4.takeOut().enjoy();
+		}	
+		
+		}
+}
